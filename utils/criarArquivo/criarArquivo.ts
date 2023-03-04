@@ -6,9 +6,6 @@ type EstruturaLogica = {
   descricao?: string;
   codigo?: string;
 };
-const transformarVariaveis = (arquivo: string, nomeSubitituido: string) => {
- let resultado = arquivo.replace("{dadosMudados}", nomeSubitituido);
-};
 
 export const criarArquivo = (
   caminho: string,
