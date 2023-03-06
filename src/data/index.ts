@@ -34,7 +34,7 @@ class {Classe}Controller implements I{Classe}Controller {
   async listaPorId(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const {dadosMudados} = await {dadosMudados}Service.listaPorId(id);
+      const {dadosMudados} = await {dadosMudados}Service.buscarPorId(id);
       res.status(200).json({dadosMudados});
     } catch (error) {
       res.status(400).json(error.message);
@@ -193,7 +193,7 @@ export default routers;
   `,
   },
   {
-    id: 4,
+    id: 5,
     descricao: "repository",
     codigofonte: `
   
@@ -225,7 +225,7 @@ export default routers;
 
 
       async pesquisarPorCriterios(criterios: Omit<{Classe}Dto, "ativo">) {
-        const { id{dadosMudados} descricao } = criterios;
+        const { id{dadosMudados},descricao } = criterios;
     
         const elementoBuscado = await this.prisma.{dadosMudados}.findMany({
           where: {

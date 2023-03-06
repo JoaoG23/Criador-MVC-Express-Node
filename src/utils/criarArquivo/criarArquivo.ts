@@ -1,11 +1,11 @@
 import * as fs from "fs";
-import { nomesEsturuturaLogica } from "../../data";
+// import { nomesEsturuturaLogica } from "../../data";
 
-type EstruturaLogica = {
-  id?: number;
-  descricao?: string;
-  codigo?: string;
-};
+// type EstruturaLogica = {
+//   id?: number;
+//   descricao?: string;
+//   codigo?: string;
+// };
 
 export const criarArquivo = (
   caminho: string,
@@ -16,5 +16,4 @@ export const criarArquivo = (
     if (err) throw err;
     console.log("Arquivo gerado" + caminho);
   });
-  // fs.writeFileSync(caminho, codigoExtraido)
 };

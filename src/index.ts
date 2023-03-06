@@ -3,20 +3,13 @@
 import * as fs from "fs";
 import { nomesEsturuturaLogica } from "./data";
 import { criarArquivo } from "./utils/criarArquivo/criarArquivo";
+import { criarDiretorioTests } from "./utils/criarDiretorioTests/criarDiretorioTests";
 import { criarPasta } from "./utils/criarPasta/criarPasta";
-
-const transformarEmNomeClasse = (nomeVariavel: string) => {
-  const extrairPrimeiraLetra = nomeVariavel.at(0);
-  const restoPalavra = nomeVariavel.slice(1, nomeVariavel.length);
-  const nomeClasse = extrairPrimeiraLetra.toLocaleUpperCase() + restoPalavra;
-  return nomeClasse;
-};
-
+import { transformarEmNomeClasse } from "./utils/transformarEmNomeClasse/transformarEmNomeClasse";
 
 const argumentos = process.argv.slice(2);
 
 let entidadoNome = argumentos[0];
-console.log("🚀 ~ file: index.ts:19 ~ entidadoNome:", entidadoNome)
 
 const gerarEstruturaMVC = (
   nomeDaEntidade: string,
@@ -28,6 +21,8 @@ const gerarEstruturaMVC = (
   if (!fs.existsSync(caminhoPastaPrincipal)) {
     criarPasta(caminhoPastaPrincipal);
   }
+
+  criarDiretorioTests(nomeDaEntidade);
 
   nomeDeEstruturasLogica.forEach((nomesFinais) => {
     /*
@@ -47,18 +42,16 @@ const gerarEstruturaMVC = (
       nomeDaEntidade
     );
 
-    const nomeDeClasse = transformarEmNomeClasse(nomeDaEntidade)
-    
+    const nomeDeClasse = transformarEmNomeClasse(nomeDaEntidade);
 
     const caminhoDosArquivos = `${pastaNomesFinaisCaminho}/${nomeDeClasse}.${nomesFinais.descricao}.ts`;
     const caminhoInterface = `${pastaNomesFinaisCaminho}/${nomeDeClasse}.${nomesFinais.descricao}.Interface.ts`;
-    const arquivoTestes = `${pastaNomesFinaisCaminho}/${nomeDeClasse}.${nomesFinais.descricao}.test.ts`;
+    const arquivoTestes = `${pastaNomesFinaisCaminho}/${nomeDeClasse}.${nomesFinais.descricao}.spec`;
     // Criar codigo
     criarArquivo(caminhoDosArquivos, variveisAdicionadas);
-    criarArquivo(caminhoInterface, '');
-    criarArquivo(arquivoTestes, '');
+    criarArquivo(caminhoInterface, "");
+    criarArquivo(arquivoTestes, "");
   });
 };
 
 gerarEstruturaMVC(entidadoNome, nomesEsturuturaLogica);
-
