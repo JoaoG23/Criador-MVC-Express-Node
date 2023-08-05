@@ -4,11 +4,11 @@
     import { Paginacao } from "../../utils/Paginacao";
     import { joinDescricaoSelect } from "./utils/joinDescricaoSelect";
     
-    export interface IAutenticacaoUsuariosRepository {
+    export interface I{Classe}Repository {
       limparDados?();
-      pesquisarPorCriterios(criterios: Omit<AutenticacaoUsuariosDto, "ativo">);
-      salvar(data: AutenticacaoUsuariosDto);
-      atualizarPorId(id: string, newData: AutenticacaoUsuariosDto);
+      pesquisarPorCriterios(criterios: Omit<{Classe}Dto, "ativo">);
+      salvar(data: {Classe}Dto);
+      atualizarPorId(id: string, newData: {Classe}Dto);
       deletarPorId(id: string);
       buscarPorId(iddepartamento: string);
       buscarTodos();
@@ -17,7 +17,7 @@
     }
     
     
-    export class AutenticacaoUsuariosRepository implements IAutenticacaoUsuariosRepository {
+    export class {Classe}Repository implements I{Classe}Repository {
       private paginacao: Paginacao;
       private prisma: PrismaClient;
       constructor() {
@@ -27,15 +27,15 @@
 
 
 
-      async pesquisarPorCriterios(criterios: Omit<AutenticacaoUsuariosDto, "ativo">) {
-        const { idautenticacaoUsuarios,descricao } = criterios;
+      async pesquisarPorCriterios(criterios: Omit<{Classe}Dto, "ativo">) {
+        const { idprogramacaofluxocaixa,descricao } = criterios;
     
-        const elementoBuscado = await this.prisma.autenticacaoUsuarios.findMany({
+        const elementoBuscado = await this.prisma.programacaofluxocaixa.findMany({
           where: {
             AND: [
               {
-                idautenticacaoUsuarios: {
-                  contains: idautenticacaoUsuarios,
+                idprogramacaofluxocaixa: {
+                  contains: idprogramacaofluxocaixa,
                 },
               },
               {
@@ -51,35 +51,35 @@
       }
 
 
-      async salvar(data: AutenticacaoUsuariosDto) {
-        return await this.prisma.autenticacaoUsuarios.create({
+      async salvar(data: {Classe}Dto) {
+        return await this.prisma.programacaofluxocaixa.create({
           data,
         });
       }
       async atualizarPorId(id: string, newData: any) {
-        return await this.prisma.autenticacaoUsuarios.update({
+        return await this.prisma.programacaofluxocaixa.update({
           where: { id },
           data: newData,
         });
       }
       async deletarPorId(id: string) {
-        return await this.prisma.autenticacaoUsuarios.delete({
+        return await this.prisma.programacaofluxocaixa.delete({
           where: { id },
         });
       }
       async buscarPorId(id: string) {
-        const autenticacaoUsuarios = await this.prisma.autenticacaoUsuarios.findFirst({
+        const programacaofluxocaixa = await this.prisma.programacaofluxocaixa.findFirst({
           where: { id },
         });
-        return autenticacaoUsuarios;
+        return programacaofluxocaixa;
       }
       async buscarTodos() {
-        return await this.prisma.autenticacaoUsuarios.findMany({
+        return await this.prisma.programacaofluxocaixa.findMany({
           include: joinDescricaoSelect,
         });
       }
       async contarTodosPorCriterio(criterios: object) {
-        const count = await this.prisma.autenticacaoUsuarios.count({ where: criterios });
+        const count = await this.prisma.programacaofluxocaixa.count({ where: criterios });
         return count;
       }
     
@@ -98,12 +98,12 @@
           );
     
         const pularPagina = (numeroPagina - 1) * itemsPorPagina;
-        const autenticacaoUsuarios = await this.prisma.autenticacaoUsuarios.findMany({
+        const programacaofluxocaixa = await this.prisma.programacaofluxocaixa.findMany({
           skip: pularPagina,
           take: itemsPorPagina,
         });
     
-        return [{ totalQuantidadePaginas, quantidadeTotalRegistros }, autenticacaoUsuarios];
+        return [{ totalQuantidadePaginas, quantidadeTotalRegistros }, programacaofluxocaixa];
       }
     }
     

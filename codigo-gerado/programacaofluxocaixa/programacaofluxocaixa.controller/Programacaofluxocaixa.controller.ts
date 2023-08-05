@@ -3,11 +3,11 @@
     import { Request, Response } from "express";
 
 
-export class AutenticacaoUsuariosController implements IAutenticacaoUsuariosController {
+class {Classe}Controller implements I{Classe}Controller {
   async listarTodosPorPagina(req: Request, res: Response) {
     try {
       const { numero_pagina, quantidade_items_pagina } = req.query;
-      const pagina = await autenticacaoUsuariosService.listarTodosPorPagina(
+      const pagina = await programacaofluxocaixaService.listarTodosPorPagina(
         numero_pagina,
         quantidade_items_pagina
       );
@@ -20,7 +20,7 @@ export class AutenticacaoUsuariosController implements IAutenticacaoUsuariosCont
 
   async listarTodos(req: Request, res: Response) {
     try {
-      const todos = await autenticacaoUsuariosService.listarTodos();
+      const todos = await programacaofluxocaixaService.listarTodos();
       res.status(200).json(todos);
     } catch (error) {
       res.status(400).json(error.message);
@@ -30,8 +30,8 @@ export class AutenticacaoUsuariosController implements IAutenticacaoUsuariosCont
   async listaPorId(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const autenticacaoUsuarios = await autenticacaoUsuariosService.buscarPorId(id);
-      res.status(200).json(autenticacaoUsuarios);
+      const programacaofluxocaixa = await programacaofluxocaixaService.buscarPorId(id);
+      res.status(200).json(programacaofluxocaixa);
     } catch (error) {
       res.status(400).json(error.message);
     }
@@ -40,9 +40,9 @@ export class AutenticacaoUsuariosController implements IAutenticacaoUsuariosCont
 
   async pesquisarPorCriterio(req: Request, res: Response) {
     try {
-      const criterios: Omit<AutenticacaoUsuariosDto, "ativo"> = req.query;
+      const criterios: Omit<{Classe}Dto, "ativo"> = req.query;
 
-      const todos = await autenticacaoUsuariosService.pesquisarPorCriterio(criterios);
+      const todos = await programacaofluxocaixaService.pesquisarPorCriterio(criterios);
       res.status(200).json(todos);
     } catch (error) {
       res.status(400).json(error.message);
@@ -52,8 +52,8 @@ export class AutenticacaoUsuariosController implements IAutenticacaoUsuariosCont
   async deletarPorId(req: Request, res: Response) {
     const { id } = req.params;
     try {
-      const autenticacaoUsuarios = await autenticacaoUsuariosService.deletarUmPorId(id);
-      res.status(200).json(autenticacaoUsuarios);
+      const programacaofluxocaixa = await programacaofluxocaixaService.deletarUmPorId(id);
+      res.status(200).json(programacaofluxocaixa);
     } catch (error) {
       res.status(400).json(error.message);
     }
@@ -61,8 +61,8 @@ export class AutenticacaoUsuariosController implements IAutenticacaoUsuariosCont
 
   async criar(req: Request, res: Response) {
     try {
-      const autenticacaoUsuarios = await autenticacaoUsuariosService.criar(req.body);
-      res.status(200).json(autenticacaoUsuarios);
+      const programacaofluxocaixa = await programacaofluxocaixaService.criar(req.body);
+      res.status(200).json(programacaofluxocaixa);
     } catch (error) {
       res.status(400).json(error.message);
     }
@@ -71,13 +71,14 @@ export class AutenticacaoUsuariosController implements IAutenticacaoUsuariosCont
   async atualizarPorId(req: Request, res: Response) {
     const { id } = req.params;
     try {
-      const autenticacaoUsuarios = await autenticacaoUsuariosService.atualizarUmPorId(id, req.body);
-      res.status(200).json(autenticacaoUsuarios);
+      const programacaofluxocaixa = await programacaofluxocaixaService.atualizarUmPorId(id, req.body);
+      res.status(200).json(programacaofluxocaixa);
     } catch (error) {
       res.status(400).json(error.message);
     }
   }
 }
 
+export default new {Classe}Controller();
 
     
